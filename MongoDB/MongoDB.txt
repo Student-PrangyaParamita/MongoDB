@@ -1,0 +1,120 @@
+MongoDB is an open-source, No-SQL document based database. No-SQL means it works for documents or it store in the form of documents.
+
+MongoDB has a strong support for aggreation pipes. It works on BSON(like JSON) format, and also best for node applications.
+
+It designed for flexibility, scalability, and performance in handling unstractured or semi-stractured data.
+
+In MongoDB, Inside one collections, we have multiple documents.
+
+Advantages of MongoDB :- 
+    @ Flexible Schema Design:-
+        * MongoDB allows dynamic, schema-less data stracture.
+        * Easily accommodate changing data requirements.
+
+    @ Scalability and Performance:-
+        * Horizontal scaling supports large datasets and high traffic.
+        * optimized read and write operations for fast performance.
+        
+    @ Document Oriented storage:-
+        * Data is stored in flexible, JSONlike BSON
+        documents.
+        * Self-contained units with rich data types and  nested arrays.
+
+    @ Dynamic Queries:-
+        * Rich query language with support for complex queries.
+        * • Utilize indexes to speed up query execution.
+
+    @ Aggregation Framework:-
+        * • Perform advanced data transformations and analysisc.
+        * Process data using multiple pipeline stages.
+        
+    @ Open Source and Community:-
+        * MongoDB is open-source with a vibrant community.
+        * Regular updates, improvements, and support.
+
+
+Managing Database in MongoDB
+-----------------------------
+
+* show dbs; :- to show the present database file.
+* use <database-name>; :- to create new database.
+* db.dropDatabase(); :- for delete the database.
+
+* show collections; :- to show the collections of database.
+* db.createCollection('<collection-name>'); :- to create a database collection.
+* db.<collection-name>.drop(); :- for delete the collection.
+
+
+Inserting Documents in MongoDB
+-------------------------------
+
+* db.<collection-name>.insertOne({
+    field1:value1,
+    field2: value2,
+    ........
+});
+
+// for many data use insertMany, and inside insertMany create array of an object because we use multiple documents.
+* db.<collection-name>.insertMany({
+    { field1: value1, field2: value2, ...},
+    { field1: value1, field2: value2, ...},
+});
+
+
+Finding Documents in MongoDB
+-----------------------------
+
+* find()
+  db.collection_name.find({key: value})
+
+* findOne() 
+  db.collection_name.findOne({key: value})  
+
+
+Importing JSON in MongoDB
+--------------------------
+
+* mongoimport jsonfile.json -d database_name -c collection_name
+* mongoimport product.json -d shop -c products
+* mongoimport products.json -d shop -c products --jsonArray
+
+* Limited to imports of 16 MB or smaller
+
+
+@ Projection
+-------------
+* db.collection.find({}, {field1: 1, field2: 1})
+
+* To include specfic fields, use projection with a value of 1 for the fields you want.
+* To exclude fields, use projection with a value of 0 for the fields you want to exclude.
+* You can't include and exclude fields simultaniously in the same query projection.
+
+
+Q. What are indexes? 
+   -  Indexes are specialized data stractures that optimize data retrieval speed in MongoDB.
+   -  Indexes store a fraction of data in a more searchable format.
+   -  They enable MongoDB to locate data faster during queries.
+   -  Indexes are seperate from collections and multiple indexes can exist per collection.
+
+Q. What is Aggregation? 
+   -  Defination:- Aggregation is the process of performing transformations on documents and combining them to produce computed results.
+   -  Pipeline Stages:- Aggregation connsist of multiple pipeline stages, each performing a specfic operation on the input data.
+   -  Benifits:- 
+   (
+    . Aggregation Data: Complex calculations and operations are possible.
+    . Advanced Transformations: Data can be combined, reshaped, and computed for insights.
+    . Efficient Processing: Aggregation handles large datasets efficiently.
+   )
+
+
+What is a SchemaType?
+- A SchemaType is a configuration object for an individual property. A SchemaType says what type a given path should have, whether it has any getters/setters, and what values are valid for that path.
+
+e.g- 
+    const schema = new Schema({ name: String });
+    schema.path('name') instanceof mongoose.SchemaType; // true
+    schema.path('name') instanceof mongoose.Schema.Types.String; // true
+    schema.path('name').instance; // 'String'
+
+- A SchemaType is different from a type. 
+In other words, 'mongoose.ObjectId !== mongoose.Types.ObjectId'. A SchemaType is just a configuration object for Mongoose. An instance of the mongoose.ObjectId SchemaType doesn't actually create MongoDB ObjectIds, it is just a configuration for a path in a schema.    
